@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Main", "EFC-Main\EFC-Main.csproj", "{81121B58-28D1-411F-AC13-0ABD4FC89DBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Interfaces", "EFC-Interfaces\EFC-Interfaces.csproj", "{A1909273-E74A-40D1-AE6D-99E6D27D3DC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-SQLServerConnection", "EFC-SQLServerConnection\EFC-SQLServerConnection.csproj", "{2753967A-2F36-4456-9C45-1D4B538303DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81121B58-28D1-411F-AC13-0ABD4FC89DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81121B58-28D1-411F-AC13-0ABD4FC89DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81121B58-28D1-411F-AC13-0ABD4FC89DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81121B58-28D1-411F-AC13-0ABD4FC89DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1909273-E74A-40D1-AE6D-99E6D27D3DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1909273-E74A-40D1-AE6D-99E6D27D3DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1909273-E74A-40D1-AE6D-99E6D27D3DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1909273-E74A-40D1-AE6D-99E6D27D3DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2753967A-2F36-4456-9C45-1D4B538303DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2753967A-2F36-4456-9C45-1D4B538303DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2753967A-2F36-4456-9C45-1D4B538303DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2753967A-2F36-4456-9C45-1D4B538303DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
