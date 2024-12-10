@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFC-DBActions\EFC-DBActions.csproj" />
+    <ProjectReference Include="..\EFC-SQLServerConnection\EFC-SQLServerConnection.csproj" />
+    <ProjectReference Include="..\EFC-PostgresqlConnection\EFC-PostgresqlConnection.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

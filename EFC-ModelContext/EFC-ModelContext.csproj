@@ -1,8 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\EFC-Models\EFC-Models.csproj" />
+    <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>EFC_SQLServerConnection</RootNamespace>
+    <RootNamespace>EFC_ModelContext</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -12,13 +17,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    </PackageReference>    
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

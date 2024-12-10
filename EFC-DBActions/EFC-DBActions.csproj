@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFC-ModelContext\EFC-ModelContext.csproj" />
+    <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
+    <ProjectReference Include="..\Helpers\Helpers.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>EFC_DBActions</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
