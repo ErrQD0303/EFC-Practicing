@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EFC-Models\EFC-Models.csproj" />
     <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
+    <ProjectReference Include="..\EFC-Logger\EFC-Logger.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -18,7 +19,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>    
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />    
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 

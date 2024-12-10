@@ -2,16 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EFC_Models;
 
 namespace EFC_Interfaces
 {
-    public interface IDBActions
+    public interface IDBActions<T>
+    where T : class, IEFModel
     {
         Task CreateDatabase();
         Task DeleteDatabase();
-        Task Insert(params IEnumerable<Product> products);
-        Task SelectAll();
-        Task SelectById(int id);
+        Task<bool> Insert(params IEnumerable<T> collections);
+        Task<IEnumerable<T>?> SelectAll();
+        Task<T?> SelectById(int id);
+        Task<T?> Update(int id, T record);
+        Task<bool> Delete(int id);
     }
 }

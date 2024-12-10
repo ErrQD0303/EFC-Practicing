@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-DBActions", "EFC-DBActi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{442F078B-8161-4530-92FD-B74B5D9B37E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Logger", "EFC-Logger\EFC-Logger.csproj", "{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{442F078B-8161-4530-92FD-B74B5D9B37E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{442F078B-8161-4530-92FD-B74B5D9B37E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{442F078B-8161-4530-92FD-B74B5D9B37E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

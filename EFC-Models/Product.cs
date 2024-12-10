@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EFC_Interfaces;
 
 namespace EFC_Models;
 
 [Table("Products")]
-public class Product
+public class Product : IEFModel
 {
     [Key]
     public int ProductId { get; set; }
