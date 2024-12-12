@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EFC-Models\EFC-Models.csproj" />
-    <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
     <ProjectReference Include="..\EFC-Logger\EFC-Logger.csproj" />
+    <ProjectReference Include="..\EFC-Attributes\EFC-Attributes.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

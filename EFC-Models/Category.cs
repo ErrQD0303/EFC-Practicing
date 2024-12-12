@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using EFC_Interfaces;
+using EFC_Attributes;
 
 namespace EFC_Models
 {
@@ -12,11 +9,14 @@ namespace EFC_Models
     public class Category : IEFModel
     {
         [Key]
-        public int CategoryId { get; set; }
+        public int Id { set; get; }
 
         [StringLength(100)]
-        public string? Name { get; set; }
+        public string? Name { set; get; }
 
-        public string? Description { get; set; }
+        [DBTypes("Category", "Description")]
+        public string? Description { set; get; }
+
+        public List<Product> Products { get; set; } = [];
     }
 }

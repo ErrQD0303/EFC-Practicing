@@ -2,14 +2,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
+    <ProjectReference Include="..\EFC-Models\EFC-Models.csproj" />
     <ProjectReference Include="..\EFC-Attributes\EFC-Attributes.csproj" />
+    <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\EFC-ModelContext\EFC-ModelContext.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>EFC_Models</RootNamespace>
+    <RootNamespace>EFC_Repositories</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>  
 
 </Project>

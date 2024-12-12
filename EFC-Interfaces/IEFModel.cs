@@ -7,5 +7,6 @@ namespace EFC_Interfaces
 {
     public interface IEFModel
     {
+        public int Id { get; set; }
     }
 }

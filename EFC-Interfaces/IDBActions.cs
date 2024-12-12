@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace EFC_Interfaces
 {
-    public interface IDBActions<T>
-    where T : class, IEFModel
+    public interface IDBActions
     {
         Task CreateDatabase();
         Task DeleteDatabase();
-        Task<bool> Insert(params IEnumerable<T> collections);
-        Task<IEnumerable<T>?> SelectAll();
-        Task<T?> SelectById(int id);
-        Task<T?> Update(int id, T record);
-        Task<bool> Delete(int id);
+        Task AddAsync<TEntity>(params IEnumerable<TEntity> collections) where TEntity : class, IEFModel;
+        Task<IEnumerable<TEntity>?> GetAllAsync<TEntity>() where TEntity : class, IEFModel;
+        Task<TEntity?> GetByIdAsync<TEntity>(int id) where TEntity : class, IEFModel;
+        Task<IEnumerable<TEntity>?> GetByConditionAsync<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class, IEFModel;
+        Task<TEntity?> UpdateAsync<TEntity>(int id, TEntity record) where TEntity : class, IEFModel;
+        Task DeleteAsync<TEntity>(int id) where TEntity : class, IEFModel;
     }
 }

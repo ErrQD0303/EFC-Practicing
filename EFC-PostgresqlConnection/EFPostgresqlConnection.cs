@@ -11,9 +11,9 @@ public class EFPostgresqlConnection : IEFDBConnection
 
     string IEFDBConnection.ConnectionString => "PostgresSQL";
 
-    public void UseDatabase(DbContextOptionsBuilder optionsBuilder)
+    public DbContextOptionsBuilder UseDatabase(DbContextOptionsBuilder optionsBuilder)
     {
         string connectionString = ((IEFDBConnection)this).GetConnectionString();
-        optionsBuilder.UseNpgsql(connectionString);
+        return optionsBuilder.UseNpgsql(connectionString);
     }
 }

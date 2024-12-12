@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Exampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-PostgresqlConnection", "EFC-PostgresqlConnection\EFC-PostgresqlConnection.csproj", "{F32744CD-2DDC-4904-AD46-0F968B1F1662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Models", "EFC-Models\EFC-Models.csproj", "{36CF51B8-83CE-4459-BE32-4FAB1E2876E7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-ModelContext", "EFC-ModelContext\EFC-ModelContext.csproj", "{73212C8B-12C3-4465-AF7D-8C40017DCC35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-DBActions", "EFC-DBActions\EFC-DBActions.csproj", "{55C760C1-EE72-4175-A94D-2E0BEE6E6B1F}"
@@ -22,6 +20,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{442F078B-8161-4530-92FD-B74B5D9B37E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Logger", "EFC-Logger\EFC-Logger.csproj", "{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Attributes", "EFC-Attributes\EFC-Attributes.csproj", "{BCFC1A08-72BE-491A-8B35-B0C35D4113CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Repositories", "EFC-Repositories\EFC-Repositories.csproj", "{F49DE24C-62CB-4743-B355-16C0BFF4AF26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Models", "EFC-Models\EFC-Models.csproj", "{39C0F251-7A45-4292-8A43-5C37A6825BC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,5 +76,17 @@ Global
 		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3939C491-E1E5-442C-A6CF-AC24C4CDE4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCFC1A08-72BE-491A-8B35-B0C35D4113CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCFC1A08-72BE-491A-8B35-B0C35D4113CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCFC1A08-72BE-491A-8B35-B0C35D4113CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCFC1A08-72BE-491A-8B35-B0C35D4113CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49DE24C-62CB-4743-B355-16C0BFF4AF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49DE24C-62CB-4743-B355-16C0BFF4AF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49DE24C-62CB-4743-B355-16C0BFF4AF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49DE24C-62CB-4743-B355-16C0BFF4AF26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

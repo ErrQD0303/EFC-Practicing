@@ -20,5 +20,5 @@ public interface IEFDBConnection
     }
 
     protected string ConnectionString { get; }
-    void UseDatabase(DbContextOptionsBuilder optionsBuilder);
+    DbContextOptionsBuilder UseDatabase(DbContextOptionsBuilder optionsBuilder);
 }

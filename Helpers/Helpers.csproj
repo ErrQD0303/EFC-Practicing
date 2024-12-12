@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\EFC-Models\EFC-Models.csproj" />
+    <ProjectReference Include="..\EFC-Interfaces\EFC-Interfaces.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

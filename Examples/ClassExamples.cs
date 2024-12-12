@@ -1,109 +1,84 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using EFC_DBActions;
-using EFC_Interfaces;
+﻿using EFC_DBActions;
 using EFC_Models;
 using EFC_PostgresqlConnection;
+using EFC_Repositories;
 using EFC_SQLServerConnection;
+using Helpers;
 
 namespace Examples;
 
 public static class ClassExamples
 {
-    private static readonly IEFDBConnection _efSQLServerConnection = new EFSQLServerConnection();
-    private static readonly IEFDBConnection _pgsqlConnection = new EFPostgresqlConnection();
+    private static readonly UnitOfWork _unitOfWork = new UnitOfWork(new EFSQLServerConnection(), new EFPostgresqlConnection());
 
-    public static async Task CreateDatabaseOnSqlServer()
+    public static async Task CreateDatabase()
     {
-        await CreateDatabase(_efSQLServerConnection);
-    }
-    public static async Task CreateDatabaseOnPostgresql()
-    {
-        await CreateDatabase(_pgsqlConnection);
-    }
-    public static async Task CreateDatabase(IEFDBConnection connection)
-    {
-        var dbActions = new DBProductActions(connection);
+        var dbActions = new DBShopActions(_unitOfWork);
         await dbActions.CreateDatabase();
     }
 
-    public static async Task DeleteDatabaseOnSqlServer()
+    public static async Task DeleteDatabase()
     {
-        await DeleteDatabase(_efSQLServerConnection);
-    }
-    public static async Task DeleteDatabaseOnPostgresql()
-    {
-        await DeleteDatabase(_pgsqlConnection);
-    }
-    public static async Task DeleteDatabase(IEFDBConnection connection)
-    {
-        var dbActions = new DBProductActions(connection);
+        var dbActions = new DBShopActions(_unitOfWork);
         await dbActions.DeleteDatabase();
     }
 
-    public static async Task InsertRecordsToProductTableOnSqlServer()
+    public static async Task InsertRecords()
     {
-        await InsertRecordsToProductTable(_efSQLServerConnection);
-    }
-    public static async Task InsertRecordsToProductTableOnPostgresql()
-    {
-        await InsertRecordsToProductTable(_pgsqlConnection);
-    }
-    public static async Task InsertRecordsToProductTable(IEFDBConnection connection)
-    {
-        var dbActions = new DBProductActions(connection);
+        var dbActions = new DBShopActions(_unitOfWork);
+
+        var cate1 = new Category() { Name = "Cate1", Description = "Description1" };
+        var cate2 = new Category() { Name = "Cate2", Description = "Description2" };
+        await dbActions.AddAsync(cate1, cate2);
         var products = new List<Product>
         {
-            new() {
-                Name = "Product1",
-                Provider = "Company 1"
-            },
-            new() {
-                Name = "Product2",
-                Provider = "Company 2"
-            }
+            new()  {Name = "Sản phẩm 1",    Price=12, Category = cate2, Provider = "provider1"},
+            new()  {Name = "Sản phẩm 2",    Price=11, Category = cate2, Provider = "provider1"},
+            new()  {Name = "Sản phẩm 3",    Price=33, Category = cate2, Provider = "provider2"},
+            new()  {Name = "Sản phẩm 4(1)", Price=323, Category = cate1, Provider = "provider2"},
+            new()  {Name = "Sản phẩm 5(1)", Price=333, Category = cate1, Category2 = cate2, Provider = "provider2"},
         };
-        await dbActions.Insert(products);
+        await dbActions.AddAsync(products);
     }
 
-    public static async Task ReadRecordsFromProductTableOnSqlServer()
+    public static async Task ReadRecordsFromProductTable()
     {
-        await ReadRecordsFromProductTable(_efSQLServerConnection);
-    }
-    public static async Task ReadRecordsFromProductTableOnPostgresql()
-    {
-        await ReadRecordsFromProductTable(_pgsqlConnection);
-    }
-    public static async Task ReadRecordsFromProductTable(IEFDBConnection connection)
-    {
-        var dbActions = new DBProductActions(connection);
+        var dbActions = new DBShopActions(_unitOfWork);
         System.Console.WriteLine("Read all records from Product table:");
-        await dbActions.SelectAll();
+        await dbActions.GetAllAsync<Product>();
         System.Console.WriteLine("Read record by ID:1");
-        await dbActions.SelectById(1);
+        var product1 = await dbActions.GetProductByIdAsync(1);
         System.Console.WriteLine("Read record by Provider:provider2");
-        await dbActions.SelectByProvider("provider2");
+        await dbActions.GetProductByProvider("provider2");
         System.Console.WriteLine("Read record by Provider:'Company 2'");
-        await dbActions.SelectByProvider("Company 2");
+        await dbActions.GetProductByProvider("Company 2");
+        System.Console.WriteLine($"Products with price greater than 30$:");
+        var products2 = await dbActions.GetByConditionAsync<Product>(p => p.Price > 30);
+        products2?.ShowItems();
     }
 
-    public static async Task UpdateRecordInProductTableOnSqlServer()
+    public static async Task ReadRecordsFromCategoryTable()
     {
-        await UpdateRecordInProductTable(_efSQLServerConnection);
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine("Read all records from Category table:");
+        var categories = await dbActions.GetAllAsync<Category>();
+        System.Console.WriteLine("Read record by ID:1");
+        var category = await dbActions.GetCategoryByIdAsync(1);
+        System.Console.WriteLine($"All Products of Category {category?.Id}:");
+        category?.Products.ShowItems();
     }
-    public static async Task UpdateRecordInProductTableOnPostgresql()
+
+    public static async Task UpdateRecordInProductTable()
     {
-        await UpdateRecordInProductTable(_pgsqlConnection);
-    }
-    public static async Task UpdateRecordInProductTable(IEFDBConnection connection)
-    {
-        var dbActions = new DBProductActions(connection);
+        var dbActions = new DBShopActions(_unitOfWork);
         System.Console.WriteLine("Update record by ID:1");
         var product = new Product
         {
             Name = "ProductA1",
-            Provider = "Company 1"
+            Provider = "Company 1",
+            CategoryId = 2
         };
-        await dbActions.Update(1, product);
+        await dbActions.UpdateAsync(1, product);
         System.Console.WriteLine("Update record's name by ID:2");
         var newName = "ProductA2";
         await dbActions.UpdateName(2, newName);
@@ -112,20 +87,19 @@ public static class ClassExamples
         await dbActions.UpdateProvider(2, newProvider);
     }
 
-    public static async Task DeleteRecordFromProductTableOnSqlServer()
+    public static async Task DeleteRecordFromProductTable()
     {
-        await DeleteRecordFromProductTable(_efSQLServerConnection);
-    }
-    public static async Task DeleteRecordFromProductTableOnPostgresql()
-    {
-        await DeleteRecordFromProductTable(_pgsqlConnection);
-    }
-    public static async Task DeleteRecordFromProductTable(IEFDBConnection connection)
-    {
-        var dbActions = new DBProductActions(connection);
+        var dbActions = new DBShopActions(_unitOfWork);
         System.Console.WriteLine("Delete record by ID:1");
-        await dbActions.Delete(1);
+        await dbActions.DeleteAsync<Product>(1);
         System.Console.WriteLine("Current records in Product table:");
-        await dbActions.SelectAll();
+        await dbActions.GetAllAsync<Product>();
+    }
+
+    public static async Task DeleteRecordFromCategoryTable()
+    {
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine("Delete record by ID:1");
+        await dbActions.DeleteAsync<Category>(1);
     }
 }

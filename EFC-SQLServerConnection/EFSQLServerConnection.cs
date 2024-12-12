@@ -10,9 +10,9 @@ public class EFSQLServerConnection : IEFDBConnection
     }
     string IEFDBConnection.ConnectionString => "SQLServer";
 
-    public void UseDatabase(DbContextOptionsBuilder optionsBuilder)
+    public DbContextOptionsBuilder UseDatabase(DbContextOptionsBuilder optionsBuilder)
     {
         string connectionString = ((IEFDBConnection)this).GetConnectionString();
-        optionsBuilder.UseSqlServer(connectionString);
+        return optionsBuilder.UseSqlServer(connectionString);
     }
 }
