@@ -8,3 +8,4 @@ await ClassExamples.InsertRecords();
 // await ClassExamples.DeleteRecordFromProductTable();
 // await ClassExamples.ReadRecordsFromCategoryTable();
 // await ClassExamples.DeleteRecordFromCategoryTable();
+await ClassExamples.QueryPraticing();
