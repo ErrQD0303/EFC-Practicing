@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Data;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using EFC_Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +9,7 @@ namespace Helpers;
 
 public static class Helper
 {
-    public static void ShowItems(this IEnumerable<IEFModel?> items)
+    public static void ShowItems(this IEnumerable<object?> items, IEnumerable<string>? showFields = null)
     {
         var sb = new StringBuilder();
         var type = items.FirstOrDefault()?.GetType();
@@ -18,10 +20,11 @@ public static class Helper
             return;
         }
 
+        showFields ??= Enumerable.Empty<string>();
         var properties = type.GetProperties();
         var typeName = type.Name;
         sb.AppendLine($"{typeName}:");
-        foreach (var property in properties)
+        foreach (var property in properties.Where(p => showFields.Contains(p.Name, StringComparer.OrdinalIgnoreCase) || !showFields.Any()))
         {
             if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
             {
@@ -40,7 +43,7 @@ public static class Helper
         {
             foreach (var item in items)
             {
-                foreach (var prop in properties)
+                foreach (var prop in properties.Where(p => showFields.Contains(p.Name, StringComparer.OrdinalIgnoreCase) || !showFields.Any()))
                 {
                     var value = prop.GetValue(item)?.ToString() ?? "null";
                     if (prop.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
@@ -73,7 +76,7 @@ public static class Helper
 
     public static DbSet<TModel>? GetGenericTypeOfDbSet<TContext, TModel>(this TContext shopContext) where TModel : class, IEFModel
     {
-        var propertyWithRepositoryAttr = typeof(TContext).GetProperties().FirstOrDefault(p => string.Equals(p.PropertyType.GetGenericArguments().FirstOrDefault()?.Name ?? "", typeof(TModel).Name, StringComparison.OrdinalIgnoreCase));
+        var propertyWithRepositoryAttr = typeof(TContext).GetProperties().FirstOrDefault(p => p.PropertyType == typeof(DbSet<TModel>) && string.Equals(p.PropertyType.GetGenericArguments().FirstOrDefault()?.Name ?? "", typeof(TModel).Name, StringComparison.OrdinalIgnoreCase));
         return propertyWithRepositoryAttr?.GetValue(shopContext) as DbSet<TModel>;
     }
 

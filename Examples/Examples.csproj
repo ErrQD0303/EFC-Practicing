@@ -5,6 +5,7 @@
     <ProjectReference Include="..\EFC-SQLServerConnection\EFC-SQLServerConnection.csproj" />
     <ProjectReference Include="..\EFC-PostgresqlConnection\EFC-PostgresqlConnection.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

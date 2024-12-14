@@ -18,5 +18,8 @@ namespace EFC_Models
         public string? Description { set; get; }
 
         public List<Product> Products { get; set; } = [];
+
+        public int CategoryDetailId { get; set; }
+        public CategoryDetail? CategoryDetail { get; set; }
     }
 }

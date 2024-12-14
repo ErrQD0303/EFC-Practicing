@@ -6,9 +6,9 @@ namespace EFC_Logger;
 public static class Logger
 {
     public static string _logFileDirectory = "EFC-Logger/Logs";
-    public static void AddLogging(this DbContextOptionsBuilder optionsBuilder, string providerName)
+    public static DbContextOptionsBuilder AddLogging(this DbContextOptionsBuilder optionsBuilder, string providerName)
     {
-        optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder =>
+        return optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder =>
         {
             // builder.AddConsole();
         }))

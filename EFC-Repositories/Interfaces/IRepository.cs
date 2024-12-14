@@ -12,6 +12,7 @@ namespace EFC_Repositories.Interfaces
         Task CreateDatabase();
         Task DeleteDatabase();
         Task SaveChangesAsync();
+        Task<IEnumerable<T>?> FromSqlRaw<T>(string? sql) where T : class;
     }
 
     public interface IRepository<T> : IRepository
@@ -23,5 +24,6 @@ namespace EFC_Repositories.Interfaces
         Task UpdateAsync(int id, T entity);
         Task DeleteAsync(int id);
         Task<IEnumerable<T>?> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<IQueryable<T>> GetAsQueryableAsync();
     }
 }

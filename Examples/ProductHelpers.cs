@@ -9,8 +9,9 @@ namespace Examples
 {
     public static class ProductHelper
     {
-        public static void ShowItems(this IEnumerable<Product?> items)
+        public static void ShowItems(this IEnumerable<Product?> items, IEnumerable<string>? showFields = null)
         {
+            showFields ??= Enumerable.Empty<string>();
             var sb = new StringBuilder();
             var type = items.FirstOrDefault()?.GetType();
             if (type == null)
@@ -23,7 +24,7 @@ namespace Examples
             var properties = type.GetProperties();
             var typeName = type.Name;
             sb.AppendLine($"{typeName}:");
-            foreach (var property in properties)
+            foreach (var property in properties.Where(p => showFields.Contains(p.Name, StringComparer.OrdinalIgnoreCase) || !showFields.Any()))
             {
                 if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
                 {
@@ -42,7 +43,7 @@ namespace Examples
             {
                 foreach (var item in items)
                 {
-                    foreach (var prop in properties)
+                    foreach (var prop in properties.Where(p => showFields.Contains(p.Name, StringComparer.OrdinalIgnoreCase) || !showFields.Any()))
                     {
                         var value = prop.GetValue(item);
                         if (prop.Name.Equals("id", StringComparison.OrdinalIgnoreCase))

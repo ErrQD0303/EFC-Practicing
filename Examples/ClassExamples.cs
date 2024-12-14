@@ -1,4 +1,5 @@
-﻿using EFC_DBActions;
+﻿using DTOs;
+using EFC_DBActions;
 using EFC_Models;
 using EFC_PostgresqlConnection;
 using EFC_Repositories;
@@ -29,7 +30,8 @@ public static class ClassExamples
 
         var cate1 = new Category() { Name = "Cate1", Description = "Description1" };
         var cate2 = new Category() { Name = "Cate2", Description = "Description2" };
-        await dbActions.AddAsync(cate1, cate2);
+        var cate3 = new Category() { Name = "Cate3", Description = "Description3" };
+        await dbActions.AddAsync(cate1, cate2, cate3);
         var products = new List<Product>
         {
             new()  {Name = "Sản phẩm 1",    Price=12, Category = cate2, Provider = "provider1"},
@@ -55,6 +57,206 @@ public static class ClassExamples
         System.Console.WriteLine($"Products with price greater than 30$:");
         var products2 = await dbActions.GetByConditionAsync<Product>(p => p.Price > 30);
         products2?.ShowItems();
+    }
+
+    public static async Task QueryPraticing()
+    {
+        await Find2ProductWithPriceGreaterThan30WhichHaveTheGreatestPrice();
+        await Find2ProductWithPriceGreaterThan30WhichHaveTheLowestPrice();
+        await FindProductById6();
+        await FindTheNameOfTheFirstProductWithPriceGreaterThan100AndHasNameStartsWithLetterS();
+        await PrintTheNameAndPriceOfAllProducts();
+        await JoinProductAndCategory();
+        await LeftJoinProductAndCategory();
+        await RightJoinProductAndCategory();
+        await FullOuterJoinProductAndCategory();
+    }
+
+    public static async Task RawQueryPraticing()
+    {
+        await SelectFromProductTable();
+        await JoinProductAndCategoryTable();
+    }
+
+    public static async Task SelectFromProductTable()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham"; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"All records in Product table:");
+        var products = await dbActions.FromSQLRawAsync<Product>("SELECT * FROM \"SanPham\"");
+        products?.ShowItems();
+    }
+
+    public static async Task JoinProductAndCategoryTable()
+    {
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Join Records in Product And Category table:");
+        var records = await dbActions.FromSQLRawAsync<CategoryProductDto>("""
+            SELECT a."CategoryId", a."CategoryName", a."ProductName", a."ProductId", a."CategoryId2", c2."Name" as "CategoryName2"
+            FROM
+                (
+                    SELECT 
+                        s."CategoryId", 
+                        c."Name" as "CategoryName",
+                        s."Id" as "ProductId",
+                        s."title" as "ProductName",
+                        s."CategoryId2"
+                    FROM 
+                        "SanPham" s
+                    LEFT JOIN 
+                        "Category" c 
+                    ON 
+                        c."Id" = s."CategoryId"
+                ) as a
+            LEFT JOIN 
+                "Category" c2 
+            ON 
+                c2."Id" = a."CategoryId2";
+        """);
+        records?.ShowItems();
+    }
+
+
+    public static async Task LeftJoinProductAndCategory()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham" s 
+        LEFT JOIN "Category" c ON s."CategoryId" = c."Id"
+        LEFT JOIN "Category" c2 ON s."CategoryId2" = c2."Id"; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Left Join Product and Category table");
+        var result = await dbActions.LeftJoinProductWithCategoryNameAsync();
+        result?.ShowItems();
+    }
+
+    public static async Task RightJoinProductAndCategory()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham" s 
+        RIGHT JOIN "Category" c ON s."CategoryId" = c."Id"; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Right Join Product and Category table");
+        var result = await dbActions.RightJoinProductWithCategoryNameAsync();
+        result?.ShowItems();
+    }
+
+    public static async Task FullOuterJoinProductAndCategory()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham" s 
+        FULL OUTER JOIN "Category" c ON s."CategoryId" = c."Id"; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Full Outer Join Product and Category table");
+        var result = await dbActions.FullOuterJoinProductWithCategoryNameAsync();
+        result?.ShowItems();
+    }
+
+    public static async Task Find2ProductWithPriceGreaterThan30WhichHaveTheGreatestPrice()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham"
+        WHERE "SanPham"."Price"::numeric > 30
+        ORDER BY "Price" DESC
+        LIMIT 2; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Products with price greater than 30$:");
+        var products = await dbActions.GetByConditionAsync<Product>(p => p.Price > 30, p => p.Price, orderByAscending: false, take: 2);
+        products?.ShowItems();
+    }
+
+    public static async Task JoinProductAndCategory()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham" s
+        JOIN "Category" c ON s."CategoryId" = c."Id"; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Join Product and Category table");
+        var result = await dbActions.JoinAndGetByConditionAsync<Product, Category>(p => p.CategoryId, c => c.Id, JoinType.InnerJoin, take: 10, skip: 0, outerOrderByKeySelector: p => p.Price, outerOrderByAscending: false, innerOrderByKeySelector: c => c.Name, innerOrderByAscending: false);
+        result?.ShowItems();
+    }
+
+    public static async Task Find2ProductWithPriceGreaterThan30WhichHaveTheLowestPrice()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham"
+        WHERE "SanPham"."Price"::numeric > 30
+        ORDER BY "Price" ASC
+        LIMIT 2; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Products with price greater than 30$:");
+        var products = await dbActions.GetByConditionAsync<Product>(p => p.Price > 30, p => p.Price, take: 2);
+        products?.ShowItems();
+    }
+
+    public static async Task PrintAllProducts()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham"
+        WHERE "SanPham"."Price"::numeric > 30
+        ORDER BY "Price" ASC
+        LIMIT 2; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Products with price greater than 30$:");
+        var products = await dbActions.GetByConditionAsync<Product>(p => p.Price > 30, p => p.Price, take: 2);
+        products?.ShowItems();
+    }
+
+    public static async Task FindProductById6()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham"
+        WHERE "SanPham"."Id" = 6; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Products with id:6");
+        var product = await dbActions.GetProductByIdAsync(6);
+        new List<Product?> { product }?.ShowItems();
+    }
+
+    public static async Task FindTheNameOfTheFirstProductWithPriceGreaterThan100AndHasNameStartsWithLetterS()
+    {
+        /* // Postgresql: query
+        SELECT title as "Name", "Price"
+        FROM "SanPham"
+        WHERE "SanPham"."Price"::numeric > 100
+
+            AND "SanPham"."title" LIKE 'S%'
+        LIMIT 1; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Products with price greater than 100$ and name starts with 'S':");
+        var getFields = new List<string> { "Name" };
+        var product = (await dbActions.GetByConditionAsync<Product>(p => p.Price > 100 && (p.Name ?? "").StartsWith("S"), take: 1, getFields: getFields))?.FirstOrDefault();
+        new List<Product?> { product }?.ShowItems(showFields: getFields);
+    }
+
+    public static async Task PrintTheNameAndPriceOfAllProducts()
+    {
+        /* // Postgresql: query
+        SELECT s.title as "Name", s."Price"
+        FROM "SanPham" s; */
+        var dbActions = new DBShopActions(_unitOfWork);
+        System.Console.WriteLine($"Products with only name and price:");
+        var getFields = new List<string> { "Name", "Price" };
+        var products = await dbActions.GetByConditionAsync<Product>(getFields: getFields);
+        products?.ShowItems(showFields: getFields);
+    }
+
+    public static async Task PrintTheNamePriceAndCategoryNameOfAllProducts()
+    {
+        /* // Postgresql: query
+        SELECT *
+        FROM "SanPham" sp 
+        INNER JOIN "Category" c ON sp."CategoryId" = c."Id"; */
+        var dbActions = new DBShopActions(_unitOfWork);
     }
 
     public static async Task ReadRecordsFromCategoryTable()

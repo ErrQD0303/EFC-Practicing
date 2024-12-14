@@ -16,6 +16,12 @@ namespace Helpers
                             "Microsoft.EntityFrameworkCore.SqlServer:money",
                             "Npgsql.EntityFrameworkCore.PostgreSQL:money"
                         }
+                    },
+                    { "Name", new string[]
+                        {
+                            "Microsoft.EntityFrameworkCore.SqlServer:nvarchar(max)",
+                            "Npgsql.EntityFrameworkCore.PostgreSQL:text"
+                        }
                     }
                 }
             },
@@ -23,7 +29,7 @@ namespace Helpers
                 {
                     { "Description", new string[]
                         {
-                            "Microsoft.EntityFrameworkCore.SqlServer:ntext",
+                            "Microsoft.EntityFrameworkCore.SqlServer:nvarchar(max)",
                             "Npgsql.EntityFrameworkCore.PostgreSQL:text"
                         }
                     }

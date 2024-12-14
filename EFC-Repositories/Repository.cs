@@ -55,5 +55,15 @@ namespace EFC_Repositories
                 }
             }
         }
+
+        async Task<IEnumerable<T>?> IRepository.FromSqlRaw<T>(string? sql)
+        {
+            if (string.IsNullOrEmpty(sql)) throw new ArgumentNullException(nameof(sql));
+
+            var context = _shopContexts[0];
+
+            var result = await context.Set<T>().FromSqlRaw(sql).ToListAsync();
+            return result;
+        }
     }
 }

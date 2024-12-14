@@ -43,6 +43,18 @@ public class Repository<T> : Repository, IRepository<T> where T : class, IEFMode
         }
     }
 
+    public Task<IQueryable<T>> GetAsQueryableAsync()
+    {
+        var context = _shopContexts[0];
+        var dbSetProperty = context.GetGenericTypeOfDbSet<ShopContext, T>();
+        if (dbSetProperty is null)
+        {
+            System.Console.WriteLine($"Table {typeof(T).Name} is empty");
+            return Task.FromResult(Enumerable.Empty<T>().AsQueryable());
+        }
+        return Task.FromResult(dbSetProperty.AsQueryable());
+    }
+
     public async Task<IEnumerable<T>?> FindAsync(Expression<Func<T, bool>> predicate)
     {
         var context = _shopContexts[0];

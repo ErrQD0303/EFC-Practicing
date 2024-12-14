@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Repositories", "EFC-Rep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC-Models", "EFC-Models\EFC-Models.csproj", "{39C0F251-7A45-4292-8A43-5C37A6825BC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{2553986F-9502-4882-AF11-3C058EE821CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,5 +90,9 @@ Global
 		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39C0F251-7A45-4292-8A43-5C37A6825BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2553986F-9502-4882-AF11-3C058EE821CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2553986F-9502-4882-AF11-3C058EE821CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2553986F-9502-4882-AF11-3C058EE821CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2553986F-9502-4882-AF11-3C058EE821CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
