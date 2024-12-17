@@ -12,6 +12,7 @@
     <RootNamespace>EFC_ModelContext</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType> <!-- Temporarily make it runnable -->
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +22,13 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>    
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />    
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>    
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />    
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />    
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 

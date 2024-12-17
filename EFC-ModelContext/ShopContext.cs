@@ -30,7 +30,7 @@ public class ShopContext : DbContext
     {
         base.OnConfiguring(optionsBuilder);
         _efConnection.UseDatabase(optionsBuilder)
-            .AddLogging(_efConnection.GetType().Name); // Login Configs
+            .AddLogging(_efConnection.GetType().Name, this.GetType().ToString()); // Login Configs
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -66,6 +66,9 @@ public class ShopContext : DbContext
             entity.ToTable("SanPham"); // You can remove the Table Attribute in the Model now
             // PK
             entity.HasKey(p => p.Id);
+            /* entity.Property(p => p.Id)
+                // .ValueGeneratedOnAdd() Use 1 of 2 methods: current line or next line
+                .UseIdentityColumn(1, 1) */
 
             // Index
             entity.HasIndex(p => p.Price)
